@@ -30,7 +30,11 @@ Esta es una aplicación web construida con Laravel 11 que permite gestionar prop
 
 ## composer install
 
-3. **Lanzar el servidor**
+3. **Hacemos las migraciones**
+
+## php artisan migrate
+
+4. **Lanzar el servidor**
 
 ## php artisan serve
 
