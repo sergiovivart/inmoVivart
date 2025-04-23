@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+//los modelos
+use App\Models\Ciudad;
+use App\Models\Provincia;
+
+class CiudadController extends Controller
+{
+    //
+    public function index()
+    {
+        $provincias = Provincia::all();
+        return view('ciudades.index', compact('provincias'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'provincia_id' => 'required|exists:provincias,id',
+        ]);
+
+        Ciudad::create([
+            'nombre'       => $request->nombre,
+            'provincia_id' => $request->provincia_id,
+        ]);
+
+        return redirect()->route('ciudades.index')->with('success', 'Ciudad creada.');
+    }
+}
