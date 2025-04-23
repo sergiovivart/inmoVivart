@@ -21,23 +21,10 @@ Esta es una aplicación web construida con Laravel 11 que permite gestionar prop
 
 1. **Clonar el repositorio**
 
-## git clone https://github.com/tu-usuario/nombre-del-repo.git
-
-## cd nombre-del-repo
-
-2. **Instalar dependencias**
-
-## composer install
-
-3. **Hacemos las migraciones**
-
-## php artisan migrate
-
-4. **Lanzar el servidor**
-
-## php artisan serve
-
----
+```bash
+git clone https://github.com/tu-usuario/nombre-del-repo.git
+cd nombre-del-repo
+```
 
 # Una ves lanzado el servidor.
 
