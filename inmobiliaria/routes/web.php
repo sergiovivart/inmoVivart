@@ -6,7 +6,6 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ProvinciaController;
 use App\Http\Controllers\CiudadController;
 
-
 Route::get('/', function () {
     return redirect(route('inmuebles.index'));
 });

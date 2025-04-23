@@ -18,11 +18,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        // 
+        $properties = Property::with('city')->get();
         return view('inmuebles.index', [
-            'properties' => Property::all(),
-            'provincias' => Provincia::all(),
-            'ciudades'   => Cities::all(),
+            'propiedades' => Property::all()
         ]);
     }
     /**
@@ -52,14 +50,6 @@ class PropertyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -68,7 +58,7 @@ class PropertyController extends Controller
         if (!$property) {
             return redirect(route('admin.index'))->with('error', 'Inmueble no encontrado');
         }
-        return view('inmuebles.edit', [
+        return view('admin.edit', [
             'property' => $property,
             'provincias' => Provincia::all(),
             'ciudades' => Cities::all(),
