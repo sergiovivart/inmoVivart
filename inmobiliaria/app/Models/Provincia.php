@@ -14,8 +14,13 @@ class Provincia extends Model
     ];
 
     // Define any model-specific logic or properties here
-    public function ciudades()
+    // public function ciudades()
+    // {
+    //     return $this->hasMany(Ciudad::class);
+    // }
+
+    public function cities()
     {
-        return $this->hasMany(Ciudad::class);
+        return $this->hasMany(Cities::class);
     }
 }

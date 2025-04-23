@@ -108,7 +108,7 @@
                         <td>{{ $property->habitaciones }}</td>
                         <td>{{ $property->baños }}</td>
                         <td>{{ $property->provincia->nombre ?? 'N/A' }}</td>
-                        <td>{{ $property->ciudad->nombre ?? 'N/A' }}</td>
+                        <td>{{ $property->city->nombre ?? 'N/A' }}</td>
                         <td>{{ $property->calle }}</td>
                     </tr>
                 @endforeach

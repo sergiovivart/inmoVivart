@@ -15,7 +15,7 @@ Route::get('/', function () {
 Route::get('/inmuebles', [PropertyController::class, 'index'])->name('inmuebles.index');
 
 // rutas administrador
-Route::get('/admin', [PropertyController::class, 'admin'])->name('admin.index');
+Route::get('/admin',         [PropertyController::class, 'admin'])->name('admin.index');
 Route::post('/admin/create', [PropertyController::class, 'create'])->name('admin.inmuebles.create');
 
 // las provincioas y ciudades

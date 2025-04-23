@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 // los modelos 
 use App\Models\Property;
 use App\Models\Ciudad;
+use App\Models\Cities;
 use App\Models\Provincia;
 
 
@@ -21,7 +22,7 @@ class PropertyController extends Controller
         return view('inmuebles.index', [
             'properties' => Property::all(),
             'provincias' => Provincia::all(),
-            'ciudades'   => Ciudad::all(),
+            'ciudades'   => Cities::all(),
         ]);
     }
     /**
@@ -29,11 +30,14 @@ class PropertyController extends Controller
      */
     public function admin(Request $request)
     {
-        // dd($request->all());
+        // Usamos 'city' porque esa es la relación definida en Property
+        $properties = Property::with('city')->get();
+
+        // return view('properties.index', compact('properties'));
         return view('admin.index', [
-            'properties' => Property::all(),
+            'properties' => $properties,
             'provincias' => Provincia::all(),
-            'ciudades'   => Ciudad::all()
+            'ciudades'   => Cities::all()
         ]);
     }
 
@@ -43,21 +47,8 @@ class PropertyController extends Controller
      */
     public function create(Request $request)
     {
-        // dd($request->all());
-        $property = new Property();
-        $property->referencia_interna = $request->referencia_interna;
-        $property->nombre             = $request->nombre;
-        $property->descripcion        = $request->descripcion;
-        $property->precio             = $request->precio;
-        $property->superficie         = $request->superficie;
-        $property->habitaciones       = $request->habitaciones;
-        $property->baños              = $request->baños;
-        $property->provincia_id       = $request->provincia_id;
-        $property->ciudad_id          = $request->ciudad_id;
-        $property->calle              = $request->calle;
-        $property->save();
-
-        return redirect(route('admin.inmuebles.index'));
+        Property::create($request->all());
+        return redirect(route('admin.index'));
     }
 
     /**

@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ciudad;
+use App\Models\Cities;
 use Illuminate\Http\Request;
 
 //los modelos
-use App\Models\Ciudad;
+// use App\Models\Ciudad;
+// use App\Models\Ciudad; // Correct model
 use App\Models\Provincia;
+use Database\Seeders\CiudadSeeder;
+
 
 class CiudadController extends Controller
 {
@@ -23,11 +28,17 @@ class CiudadController extends Controller
             'nombre' => 'required|string|max:255',
             'provincia_id' => 'required|exists:provincias,id',
         ]);
+        // Ciudad::create([
+        //     'nombre'       => $request->nombre,
+        //     'provincia_id' => $request->provincia_id,
+        // ]);
 
-        Ciudad::create([
+        Cities::create([
             'nombre'       => $request->nombre,
             'provincia_id' => $request->provincia_id,
         ]);
+
+
 
         return redirect()->route('ciudades.index')->with('success', 'Ciudad creada.');
     }

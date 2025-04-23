@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('habitaciones');
             $table->integer('baños');
             $table->foreignId('provincia_id')->constrained();
-            $table->foreignId('ciudad_id')->constrained();
+            $table->foreignId('ciudad_id')->constrained('cities');
             $table->string('calle');
             $table->timestamps();
         });

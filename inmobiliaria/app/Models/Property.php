@@ -22,9 +22,10 @@ class Property extends Model
         'calle'
     ];
 
-    public function ciudad()
+
+    public function city()
     {
-        return $this->belongsTo(Ciudad::class);
+        return $this->belongsTo(Cities::class, 'ciudad_id'); // Especificamos la clave foránea si no es convencional
     }
 
     public function provincia()
