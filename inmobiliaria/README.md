@@ -1,6 +1,7 @@
 # 🏡 Laravel 11 - Gestor de Propiedades Inmobiliarias
 
-Esta es una aplicación web construida con Laravel 11 que permite gestionar propiedades inmobiliarias. El proyecto se inspira en portales como Idealista y está centrado en el desarrollo backend, con funcionalidades básicas de frontend para la administración.
+Esta es una aplicación web construida con Laravel 11 que permite gestionar propiedades inmobiliarias.  
+El proyecto se inspira en portales como Idealista y está centrado en el desarrollo backend, con funcionalidades básicas de frontend para la administración.
 
 ## ✨ Características
 
@@ -17,29 +18,13 @@ Esta es una aplicación web construida con Laravel 11 que permite gestionar prop
 -   SQLite3
 -   Laravel 11
 
+---
+
 ## 🚀 Instalación
 
 1. **Clonar el repositorio**
 
-# git clone https://github.com/tu-usuario/nombre-del-repo.git
-
-# cd nombre-del-repo
-
-2. **Instalar dependencias**
-
-# composer install
-
-3. **Hacemos las migraciones**
-
-# php artisan migrate
-
-4. **Lanzar el servidor**
-
-# php artisan serve
-
----
-
-# Una ves lanzado el servidor.
-
-http://127.0.0.1:8000/inmuebles -> direccion con lsitado de inmuebles.
-http://127.0.0.1:8000/admin -> panel de administrador para crear nuevos inmuebles.
+```bash
+git clone https://github.com/tu-usuario/nombre-del-repo.git
+cd nombre-del-repo
+```
