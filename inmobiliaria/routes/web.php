@@ -17,6 +17,9 @@ Route::get('/inmuebles', [PropertyController::class, 'index'])->name('inmuebles.
 // rutas administrador
 Route::get('/admin',         [PropertyController::class, 'admin'])->name('admin.index');
 Route::post('/admin/create', [PropertyController::class, 'create'])->name('admin.inmuebles.create');
+Route::get('/admin/edit/{id}', [PropertyController::class, 'edit'])->name('admin.inmuebles.edit');
+Route::put('/admin/update/{id}', [PropertyController::class, 'update'])->name('properties.update'); // Nueva ruta
+Route::get('/admin/destroy/{id}', [PropertyController::class, 'destroy'])->name('admin.inmuebles.delete');
 
 // las provincioas y ciudades
 Route::get('/provincias', [ProvinciaController::class, 'index'])->name('provincias.index');

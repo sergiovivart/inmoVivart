@@ -40,6 +40,6 @@ class CiudadController extends Controller
 
 
 
-        return redirect()->route('ciudades.index')->with('success', 'Ciudad creada.');
+        return redirect()->route('admin.index')->with('success', 'Ciudad creada.');
     }
 }
