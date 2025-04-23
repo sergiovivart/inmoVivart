@@ -9,6 +9,10 @@
 
 <body class="bg-light p-4">
 
+    <div class="container">
+        <h3>Propiedades</h3>
+    </div>
+
     <div id="inmuebles" class="container">
 
         @foreach ($propiedades as $propiedad)
