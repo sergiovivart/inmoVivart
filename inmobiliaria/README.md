@@ -14,7 +14,6 @@ Esta es una aplicación web construida con Laravel 11 que permite gestionar prop
 
 -   PHP >= 8.2
 -   Composer
--   Node.js y NPM (opcional, para assets)
 -   SQLite3
 -   Laravel 11
 
