@@ -75,20 +75,12 @@ class PropertyController extends Controller
             return redirect(route('admin.index'))->with('error', 'Inmueble no encontrado');
         }
 
-        //c omo puedo actualiar solos algunos campos de los que quiero  
         $property->nombre = $request->input('name');
         $property->descripcion = $request->input('description');
         // $property->precio  = $request->input('price');
         $property->provincia_id = $request->input('provincia_id');
         $property->ciudad_id = $request->input('ciudad_id');
         $property->save();
-        // o puedo usar el metodo update
-        // $property->fill($request->all());
-        // $property->save();
-
-        // o puedo usar el metodo update
-
-        // $property->update($request->all());
 
         return redirect(route('admin.index'))->with('success', 'Inmueble actualizado correctamente');
     }

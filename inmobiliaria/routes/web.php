@@ -20,9 +20,6 @@ Route::get('/admin/edit/{id}', [PropertyController::class, 'edit'])->name('admin
 Route::put('/admin/update/{id}', [PropertyController::class, 'update'])->name('properties.update'); // Nueva ruta
 Route::get('/admin/destroy/{id}', [PropertyController::class, 'destroy'])->name('admin.inmuebles.delete');
 
-// las provincioas y ciudades
-Route::get('/provincias', [ProvinciaController::class, 'index'])->name('provincias.index');
+// rutas para las provincias y ciudades
 Route::post('/provincias/store', [ProvinciaController::class, 'store'])->name('provincias.store');
-
-Route::get('/ciudades', [CiudadController::class, 'index'])->name('ciudades.index');
 Route::post('/ciudades/store', [CiudadController::class, 'store'])->name('ciudades.store');
