@@ -27,7 +27,7 @@ cd inmoVivart
 cd inmobiliaria
 composer install
 php artisan migrate
-php artisna serve
+php artisan serve
 ```
 
 # Una ves lanzado el servidor.
