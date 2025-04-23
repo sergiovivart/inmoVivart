@@ -19,11 +19,15 @@ Esta es una aplicación web construida con Laravel 11 que permite gestionar prop
 
 ## 🚀 Instalación
 
-1. **Clonar el repositorio**
+1. **Comandos para lanzar la aplicacion, en este orden**
 
 ```bash
 git clone https://github.com/tu-usuario/nombre-del-repo.git
-cd nombre-del-repo
+cd inmoVivart
+cd inmobiliaria
+composer install
+php artisan migrate
+php artisna serve
 ```
 
 # Una ves lanzado el servidor.
