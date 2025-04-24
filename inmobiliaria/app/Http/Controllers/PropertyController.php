@@ -16,11 +16,26 @@ class PropertyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $properties = Property::with('city')->get();
+        $query = Property::with(['provincia', 'city']);
+
+        // Filtrar por provincia
+        if ($request->filled('provincia_id')) {
+            $query->where('provincia_id', $request->provincia_id);
+        }
+
+        // Filtrar por ciudad
+        if ($request->filled('ciudad_id')) {
+            $query->where('ciudad_id', $request->ciudad_id);
+        }
+
+        $properties = $query->get();
+
         return view('inmuebles.index', [
-            'propiedades' => Property::all()
+            'propiedades' => $properties,
+            'provincias' => Provincia::all(),
+            'ciudades' => Cities::all(),
         ]);
     }
     /**

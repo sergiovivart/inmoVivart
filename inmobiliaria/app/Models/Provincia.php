@@ -13,7 +13,7 @@ class Provincia extends Model
         'nombre'
     ];
 
-    public function cities()
+    public function city()
     {
         return $this->hasMany(Cities::class);
     }

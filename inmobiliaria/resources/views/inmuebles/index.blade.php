@@ -23,6 +23,40 @@
         <h3>Propiedades</h3>
     </div>
 
+    <!-- filepath: c:\Users\purpleflame\Desktop\DEV\inmoVivart\inmobiliaria\resources\views\inmuebles\index.blade.php -->
+    <div class="container mb-4">
+        <form action="{{ route('inmuebles.index') }}" method="GET" class="row g-3">
+            <div class="col-md-4">
+                <label for="provincia" class="form-label">Provincia</label>
+                <select name="provincia_id" id="provincia" class="form-select">
+                    <option value="">Todas las provincias</option>
+                    @foreach ($provincias as $provincia)
+                        <option value="{{ $provincia->id }}"
+                            {{ request('provincia_id') == $provincia->id ? 'selected' : '' }}>
+                            {{ $provincia->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="ciudad" class="form-label">Ciudad</label>
+                <select name="ciudad_id" id="ciudad" class="form-select">
+                    <option value="">Todas las ciudades</option>
+                    @foreach ($ciudades as $ciudad)
+                        <option value="{{ $ciudad->id }}" {{ request('ciudad_id') == $ciudad->id ? 'selected' : '' }}>
+                            {{ $ciudad->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </form>
+    </div>
+
+
+
     <div id="inmuebles" class="container">
         <div class="row">
             @foreach ($propiedades as $propiedad)
@@ -40,7 +74,7 @@
                             <p class="card-text">Ubicación:
                                 <span>{{ $propiedad->provincia->nombre ?? 'Sin provincia' }}</span>
                                 <span> - </span>
-                                <span>{{ $propiedad->city->nombre ?? 'Sin ciusdad' }}</span>
+                                <span>{{ $propiedad->city->nombre ?? 'Sin ciudad' }}</span>
                             </p>
                         </div>
                     </div>
