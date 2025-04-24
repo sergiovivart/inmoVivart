@@ -17,6 +17,39 @@
                 <div class="container">
                     <h2 class="mb-4">Crear Propiedad</h2>
 
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+
+                    <!-- resources/views/admin/subir-imagen.blade.php -->
+                    <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label>Seleccionar Imagen:</label>
+                                <input type="file" name="imagen" id="imagenInput" required>
+
+                                <br><br>
+                                <img id="preview" style="max-width: 300px; display: none;" />
+                                <br><br>
+
+                            </div>
+                            <div class="col">
+                                <label for="referencia">Referencia Interna</label>
+                                <input type="text" name="referencia" class="form-control" required>
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-primary" type="submit">Subir Imagen</button>
+                    </form>
+
+                    <hr class="my-4">
+
                     <form action="{{ route('admin.inmuebles.create') }}" method="POST">
                         @csrf
 
@@ -114,6 +147,7 @@
                 {{-- fin del crear provincia  --}}
 
                 <div id="crearCiudad" class="container">
+
                     <h2 class="mb-4">Crear Ciudad</h2>
 
                     <form method="POST" action="{{ route('ciudades.store') }}">
@@ -151,6 +185,7 @@
             <table class="table table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
+                        <th>Imagen</th>
                         <th>Referencia</th>
                         <th>Nombre</th>
                         <th>Precio</th>
@@ -166,6 +201,10 @@
                 <tbody>
                     @foreach ($properties as $property)
                         <tr>
+                            <td>
+                                <img src="/imagenes/{{ $property->referencia_interna }}/foto.jpg"
+                                    alt="imagenPropiedad" class="img-fluid" style="width: 100px; height: auto;">
+                            </td>
                             <td>{{ $property->referencia_interna }}</td>
                             <td>{{ $property->nombre }}</td>
                             <td>{{ $property->precio }}</td>
@@ -191,7 +230,27 @@
     </div>
 
 
+    <script>
+        // para verificar la imagen 
+        document.getElementById('imagenInput').addEventListener('change', function(e) {
+            const preview = document.getElementById('preview');
+            const file = e.target.files[0];
 
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+            }
+        });
+    </script>
 
 
     <!-- Bootstrap JS (opcional) -->

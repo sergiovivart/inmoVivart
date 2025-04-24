@@ -13,12 +13,6 @@ class Provincia extends Model
         'nombre'
     ];
 
-    // Define any model-specific logic or properties here
-    // public function ciudades()
-    // {
-    //     return $this->hasMany(Ciudad::class);
-    // }
-
     public function cities()
     {
         return $this->hasMany(Cities::class);

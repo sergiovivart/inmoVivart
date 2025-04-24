@@ -28,10 +28,6 @@ class CiudadController extends Controller
             'nombre' => 'required|string|max:255',
             'provincia_id' => 'required|exists:provincias,id',
         ]);
-        // Ciudad::create([
-        //     'nombre'       => $request->nombre,
-        //     'provincia_id' => $request->provincia_id,
-        // ]);
 
         Cities::create([
             'nombre'       => $request->nombre,

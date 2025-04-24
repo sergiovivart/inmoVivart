@@ -21,7 +21,6 @@ class ProvinciaController extends Controller
 
         // Crear la provincia
         Provincia::create(['nombre' => $request->nombre]);
-
         return redirect()->route('admin.index')->with('success', 'Provincia creada.');
     }
 }

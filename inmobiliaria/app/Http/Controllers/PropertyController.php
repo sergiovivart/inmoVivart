@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 // los modelos 
 use App\Models\Property;
-use App\Models\Ciudad;
 use App\Models\Cities;
 use App\Models\Provincia;
 
@@ -92,6 +92,12 @@ class PropertyController extends Controller
     {
         $property = Property::find($id);
         if ($property) {
+            $carpeta = 'imagenes/' . $property->referencia_interna;
+
+            if (File::exists($carpeta)) {
+                File::deleteDirectory($carpeta);
+            }
+
             $property->delete();
             return redirect(route('admin.index'))->with('success', 'Inmueble eliminado correctamente');
         } else {

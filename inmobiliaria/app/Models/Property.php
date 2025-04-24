@@ -25,7 +25,8 @@ class Property extends Model
 
     public function city()
     {
-        return $this->belongsTo(Cities::class, 'ciudad_id'); // Especificamos la clave foránea si no es convencional
+        // Especificamos la clave foránea si no es convencional
+        return $this->belongsTo(Cities::class, 'ciudad_id');
     }
 
     public function provincia()
