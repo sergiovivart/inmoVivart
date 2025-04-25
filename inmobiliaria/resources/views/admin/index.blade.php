@@ -56,12 +56,15 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label>Referencia Interna</label>
-                                <input type="text" name="referencia_interna" class="form-control" required>
+                                <input type="text" name="referencia_interna" class="form-control"
+                                    value="{{ request()->query('ref') ?? '' }}" required>
                             </div>
+
                             <div class="col">
                                 <label>Nombre</label>
                                 <input type="text" name="nombre" class="form-control" required>
                             </div>
+
                         </div>
 
                         <div class="mb-3">

@@ -31,6 +31,7 @@ class SubidorController extends Controller
         $nombreArchivo = 'foto' . '.' . $archivo->getClientOriginalExtension();
         $archivo->move($rutaCarpeta, $nombreArchivo);
 
-        return back()->with('success', 'Imagen subida con éxito');
+        // como puedo regresar al mismo formulario pero con un parametro pasado por la URL
+        return redirect('/admin?ref=' . $referencia)->with('success', 'Imagen subida con éxito');
     }
 }
