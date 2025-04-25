@@ -25,6 +25,5 @@ Route::get('/admin/destroy/{id}', [PropertyController::class, 'destroy'])->name(
 Route::post('/provincias/store', [ProvinciaController::class, 'store'])->name('provincias.store');
 Route::post('/ciudades/store',   [CiudadController::class, 'store'])->name('ciudades.store');
 
-
 // subidor de imagenes
 Route::any('/upload', [SubidorController::class, 'upload'])->name('upload');

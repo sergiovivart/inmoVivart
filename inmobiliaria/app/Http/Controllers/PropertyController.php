@@ -106,17 +106,13 @@ class PropertyController extends Controller
     public function destroy(string $id)
     {
         $property = Property::find($id);
-        if ($property) {
-            $carpeta = 'imagenes/' . $property->referencia_interna;
+        $carpeta = 'imagenes/' . $property->referencia_interna;
 
-            if (File::exists($carpeta)) {
-                File::deleteDirectory($carpeta);
-            }
-
-            $property->delete();
-            return redirect(route('admin.index'))->with('success', 'Inmueble eliminado correctamente');
-        } else {
-            return redirect(route('admin.index'))->with('error', 'Inmueble no encontrado');
+        if (File::exists($carpeta)) {
+            File::deleteDirectory($carpeta);
         }
+
+        $property->delete();
+        return redirect(route('admin.index'))->with('success', 'Inmueble eliminado correctamente');
     }
 }
