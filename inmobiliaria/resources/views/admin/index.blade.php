@@ -24,33 +24,7 @@
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
 
-                    <!-- resources/views/admin/subir-imagen.blade.php -->
-                    <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label>Seleccionar Imagen:</label>
-                                <input type="file" name="imagen" id="imagenInput" required>
-
-                                <br><br>
-                                <img id="preview" style="max-width: 300px; display: none;" />
-                                <br><br>
-
-                            </div>
-                            <div class="col">
-                                <label for="referencia">Referencia Interna</label>
-                                <input type="text" name="referencia" class="form-control" required>
-                            </div>
-                        </div>
-
-
-                        <button class="btn btn-primary" type="submit">Subir Imagen</button>
-                    </form>
-
-                    <hr class="my-4">
-
-                    <form action="{{ route('admin.inmuebles.create') }}" method="POST">
+                    <form action="{{ route('admin.inmuebles.create') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -65,6 +39,15 @@
                                 <input type="text" name="nombre" class="form-control" required>
                             </div>
 
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label>Seleccionar Imagen(es)</label>
+                                <input type="file" name="imagen[]" id="imagenInput" class="form-control"
+                                    accept="image/*" multiple>
+                                <div id="previews" class="mt-3 d-flex gap-2 flex-wrap"></div>
+                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -205,7 +188,7 @@
                     @foreach ($properties as $property)
                         <tr>
                             <td>
-                                <img src="/imagenes/{{ $property->referencia_interna }}/foto.jpg"
+                                <img src="{{ asset('storage/imagenes/' . $property->referencia_interna . '/foto.jpg') }}"
                                     alt="imagenPropiedad" class="img-fluid" style="width: 100px; height: auto;">
                             </td>
                             <td>{{ $property->referencia_interna }}</td>
@@ -234,25 +217,34 @@
 
 
     <script>
-        // para verificar la imagen 
-        document.getElementById('imagenInput').addEventListener('change', function(e) {
-            const preview = document.getElementById('preview');
-            const file = e.target.files[0];
+        // Previsualización de imágenes múltiples antes de subir
+        const imagenInput = document.getElementById('imagenInput');
+        const previews = document.getElementById('previews');
 
-            if (file) {
-                const reader = new FileReader();
+        if (imagenInput) {
+            imagenInput.addEventListener('change', function(e) {
+                previews.innerHTML = '';
+                const files = Array.from(e.target.files || []);
 
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
+                files.forEach(file => {
+                    if (!file.type.startsWith('image/')) return;
 
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = '';
-                preview.style.display = 'none';
-            }
-        });
+                    const reader = new FileReader();
+                    const img = document.createElement('img');
+                    img.style.width = '120px';
+                    img.style.height = '80px';
+                    img.style.objectFit = 'cover';
+                    img.className = 'border rounded';
+
+                    reader.onload = function(evt) {
+                        img.src = evt.target.result;
+                        previews.appendChild(img);
+                    }
+
+                    reader.readAsDataURL(file);
+                });
+            });
+        }
     </script>
 
 

@@ -36,3 +36,14 @@ php artisan serve
 -   http://127.0.0.1:8000/inmuebles -> direccion con lsitado de inmuebles.
 -   http://127.0.0.1:8000/admin -> panel de administrador para crear nuevos inmuebles.
 -   _Importante_ : recuerda crear una provincia y asignarle su ciudad antes de crear alguna nueva propiedad.
+
+## 📁 Almacenamiento de imágenes
+
+Las imágenes subidas se almacenan en el disco `public` bajo `storage/imagenes/{referencia}`.
+Antes de usar la subida de imágenes en entorno local, ejecuta:
+
+```bash
+php artisan storage:link
+```
+
+Esto crea el enlace simbólico `public/storage` apuntando a `storage/app/public`, permitiendo acceder a las imágenes mediante URLs como `/storage/imagenes/{referencia}/foto.jpg`.

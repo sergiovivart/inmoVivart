@@ -1,11 +1,14 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
+    use SoftDeletes;
 
     protected $table = 'properties'; // 👈 Solución al problema
 
@@ -21,6 +24,8 @@ class Property extends Model
         'ciudad_id',
         'calle'
     ];
+
+    protected $dates = ['deleted_at'];
 
 
     public function city()

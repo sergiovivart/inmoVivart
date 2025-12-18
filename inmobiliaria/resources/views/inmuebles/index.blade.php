@@ -65,8 +65,8 @@
                         <div class="card-body">
 
                             <div class="card-image">
-                                <img src="/imagenes/{{ $propiedad->referencia_interna }}/foto.jpg" alt="imagenPropiedad"
-                                    class="img-fluid">
+                                <img src="{{ asset('storage/imagenes/' . $propiedad->referencia_interna . '/foto.jpg') }}"
+                                    alt="imagenPropiedad" class="img-fluid">
                             </div>
                             <h5 class="card-title">{{ $propiedad->nombre }}</h5>
                             <p class="card-text">Descripción: {{ $propiedad->descripcion }}</p>

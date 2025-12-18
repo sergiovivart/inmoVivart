@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -19,23 +20,22 @@ class SubidorControllerTest extends TestCase
         // Parámetro de referencia
         $referencia = 'test-referencia';
 
-        // Simular la solicitud POST
+        // Usar disco falso y simular la solicitud POST
+        Storage::fake('public');
+
         $response = $this->post('/upload', [
             'imagen' => $file,
             'referencia' => $referencia,
         ]);
 
-        // Verificar que el archivo se haya guardado en la ubicación correcta
-        $rutaCarpeta = public_path('imagenes/' . $referencia);
+        // Verificar que el archivo se haya guardado en el disco público
         $nombreArchivo = 'foto.jpg';
-
-        $this->assertTrue(File::exists($rutaCarpeta . '/' . $nombreArchivo));
+        Storage::disk('public')->assertExists('imagenes/' . $referencia . '/' . $nombreArchivo);
 
         // Verificar la redirección con el parámetro esperado
         $response->assertRedirect('/admin?ref=' . $referencia);
 
-        // Limpiar el entorno de prueba eliminando el archivo y la carpeta
-        File::deleteDirectory(public_path('imagenes/' . $referencia));
+        // No es necesario limpiar al usar Storage::fake
     }
 
     public function test_image_upload_validation_fails(): void

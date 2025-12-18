@@ -151,7 +151,7 @@ class PropertyControllerTest extends TestCase
         // corremos la funcion
         $response = $this->get(route('admin.inmuebles.delete', $property->id));
 
-        $this->assertDatabaseMissing('properties', ['id' => $property->id]);
+        $this->assertSoftDeleted('properties', ['id' => $property->id]);
         $this->assertFalse(File::exists($carpeta));
         $response->assertRedirect(route('admin.index'));
     }

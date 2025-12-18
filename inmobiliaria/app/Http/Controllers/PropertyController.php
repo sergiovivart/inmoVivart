@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
+use App\Http\Requests\PropertyStoreRequest;
+use App\Http\Requests\PropertyUpdateRequest;
 
 // los modelos 
 use App\Models\Property;
@@ -58,9 +61,36 @@ class PropertyController extends Controller
     /**
      * Store a newly created resource
      */
-    public function create(Request $request)
+    public function create(PropertyStoreRequest $request)
     {
-        Property::create($request->all());
+        $data = $request->validated();
+
+        if (empty($data['referencia_interna'])) {
+            $data['referencia_interna'] = 'REF' . uniqid();
+        }
+
+        $property = Property::create($data);
+
+        // Guardar imágenes si vienen en la petición
+        if ($request->hasFile('imagen')) {
+            $archivos = $request->file('imagen');
+            if (!is_array($archivos)) {
+                $archivos = [$archivos];
+            }
+
+            $total = count($archivos);
+            foreach ($archivos as $index => $archivo) {
+                $extension = $archivo->getClientOriginalExtension();
+                if ($total === 1) {
+                    $nombreArchivo = 'foto.' . $extension;
+                } else {
+                    $nombreArchivo = 'foto' . ($index + 1) . '.' . $extension;
+                }
+
+                Storage::disk('public')->putFileAs('imagenes/' . $data['referencia_interna'], $archivo, $nombreArchivo);
+            }
+        }
+
         return redirect(route('admin.index'));
     }
 
@@ -83,18 +113,11 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PropertyUpdateRequest $request, Property $property)
     {
-        $property = Property::find($id);
-        if (!$property) {
-            return redirect(route('admin.index'))->with('error', 'Inmueble no encontrado');
-        }
+        $data = $request->validated();
 
-        $property->nombre = $request->input('name');
-        $property->descripcion = $request->input('description');
-        // $property->precio  = $request->input('price');
-        $property->provincia_id = $request->input('provincia_id');
-        $property->ciudad_id = $request->input('ciudad_id');
+        $property->fill($data);
         $property->save();
 
         return redirect(route('admin.index'))->with('success', 'Inmueble actualizado correctamente');
@@ -103,13 +126,12 @@ class PropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Property $property)
     {
-        $property = Property::find($id);
         $carpeta = 'imagenes/' . $property->referencia_interna;
 
-        if (File::exists($carpeta)) {
-            File::deleteDirectory($carpeta);
+        if (Storage::disk('public')->exists($carpeta)) {
+            Storage::disk('public')->deleteDirectory($carpeta);
         }
 
         $property->delete();
