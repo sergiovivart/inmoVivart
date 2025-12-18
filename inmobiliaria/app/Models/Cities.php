@@ -2,22 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Cities extends Model
+// Backwards compatibility class: alias plural `Cities` to singular `Ciudad`
+class Cities extends Ciudad
 {
-
-    protected $table = 'cities'; // Especifica el nombre correcto de la tabla
-
-    protected $fillable = ['nombre', 'provincia_id'];
-
-    public function provincia()
-    {
-        return $this->belongsTo(Provincia::class);
-    }
-
-    public function properties()
-    {
-        return $this->hasMany(Property::class);
-    }
+    // left intentionally empty; use `Ciudad` methods/properties
 }

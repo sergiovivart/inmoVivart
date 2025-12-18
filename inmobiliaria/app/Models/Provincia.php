@@ -13,8 +13,9 @@ class Provincia extends Model
         'nombre'
     ];
 
-    public function city()
+    // Relación: una provincia tiene muchas ciudades
+    public function cities()
     {
-        return $this->hasMany(Cities::class);
+        return $this->hasMany(Ciudad::class);
     }
 }

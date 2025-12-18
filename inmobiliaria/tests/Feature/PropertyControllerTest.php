@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Property;
 use App\Models\Provincia;
-use App\Models\Cities;
+use App\Models\Ciudad;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
@@ -16,7 +16,7 @@ class PropertyControllerTest extends TestCase
     public function test_index_displays_properties(): void
     {
         $provincia = Provincia::create(['nombre' => 'Provincia Test']);
-        $ciudad = Cities::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
+        $ciudad = Ciudad::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
         Property::create([
             'referencia_interna' => 'test-ref', // Agrega este campo
             'nombre' => 'Propiedad Test',
@@ -42,7 +42,7 @@ class PropertyControllerTest extends TestCase
     public function test_create_creates_a_property(): void
     {
         $provincia = Provincia::create(['nombre' => 'Provincia Test']);
-        $ciudad = Cities::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
+        $ciudad = Ciudad::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
 
         $data = [
             'referencia_interna' => 'test-ref', // Agrega este campo
@@ -66,7 +66,7 @@ class PropertyControllerTest extends TestCase
     public function test_edit_displays_edit_view(): void
     {
         $provincia = Provincia::create(['nombre' => 'Provincia Test']);
-        $ciudad = Cities::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
+        $ciudad = Ciudad::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
 
         $property = Property::create([
             'referencia_interna' => 'test-ref001', // Agrega este campo
@@ -91,7 +91,7 @@ class PropertyControllerTest extends TestCase
     {
 
         $provincia = Provincia::create(['nombre' => 'Provincia Test']);
-        $ciudad = Cities::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
+        $ciudad = Ciudad::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
 
 
         $property = Property::create([
@@ -131,7 +131,7 @@ class PropertyControllerTest extends TestCase
     {
 
         $provincia = Provincia::create(['nombre' => 'Provincia Test']);
-        $ciudad = Cities::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
+        $ciudad = Ciudad::create(['nombre' => 'Ciudad Test', 'provincia_id' => $provincia->id]);
         $property = Property::create([
             'referencia_interna' => 'test-ref', // Agrega este campo
             'nombre' => 'Propiedad Test',

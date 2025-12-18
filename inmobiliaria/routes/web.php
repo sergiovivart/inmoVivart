@@ -25,5 +25,8 @@ Route::get('/admin/destroy/{property}', [PropertyController::class, 'destroy'])-
 Route::post('/provincias/store', [ProvinciaController::class, 'store'])->name('provincias.store');
 Route::post('/ciudades/store',   [CiudadController::class, 'store'])->name('ciudades.store');
 
+// API: obtener ciudades por provincia (AJAX)
+Route::get('/provincias/{id}/ciudades', [CiudadController::class, 'byProvincia'])->name('provincias.ciudades');
+
 // subidor de imagenes
 Route::any('/upload', [SubidorController::class, 'upload'])->name('upload');

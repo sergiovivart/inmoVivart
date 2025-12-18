@@ -250,6 +250,42 @@
 
     <!-- Bootstrap JS (opcional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Actualiza el select de ciudades según la provincia seleccionada (AJAX)
+        async function fetchCiudades(provinciaId, targetSelect) {
+            if (!provinciaId) {
+                targetSelect.innerHTML = '<option value="">Seleccione provincia primero</option>';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/provincias/${provinciaId}/ciudades`);
+                if (!res.ok) throw new Error('Network response not ok');
+                const ciudades = await res.json();
+
+                targetSelect.innerHTML = '<option value="">Seleccione</option>';
+                ciudades.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.nombre;
+                    targetSelect.appendChild(opt);
+                });
+            } catch (err) {
+                console.error('Error cargando ciudades:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const provinciaSelect = document.querySelector('#provincia');
+            const ciudadSelect = document.querySelector('#ciudad');
+
+            if (provinciaSelect && ciudadSelect) {
+                provinciaSelect.addEventListener('change', function() {
+                    fetchCiudades(this.value, ciudadSelect);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

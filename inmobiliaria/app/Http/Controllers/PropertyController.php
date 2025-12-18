@@ -10,7 +10,7 @@ use App\Http\Requests\PropertyUpdateRequest;
 
 // los modelos 
 use App\Models\Property;
-use App\Models\Cities;
+use App\Models\Ciudad;
 use App\Models\Provincia;
 
 
@@ -38,7 +38,7 @@ class PropertyController extends Controller
         return view('inmuebles.index', [
             'propiedades' => $properties,
             'provincias' => Provincia::all(),
-            'ciudades' => Cities::all(),
+            'ciudades' => Ciudad::all(),
         ]);
     }
     /**
@@ -53,7 +53,7 @@ class PropertyController extends Controller
         return view('admin.index', [
             'properties' => $properties,
             'provincias' => Provincia::all(),
-            'ciudades'   => Cities::all()
+            'ciudades'   => Ciudad::all()
         ]);
     }
 
@@ -106,7 +106,7 @@ class PropertyController extends Controller
         return view('admin.edit', [
             'property' => $property,
             'provincias' => Provincia::all(),
-            'ciudades' => Cities::all(),
+            'ciudades' => Ciudad::all(),
         ]);
     }
 

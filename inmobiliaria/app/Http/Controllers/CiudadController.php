@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ciudad;
-use App\Models\Cities;
 use Illuminate\Http\Request;
 
-//los modelos
-// use App\Models\Ciudad;
-// use App\Models\Ciudad; // Correct model
 use App\Models\Provincia;
-use Database\Seeders\CiudadSeeder;
 
 
 class CiudadController extends Controller
@@ -22,6 +17,15 @@ class CiudadController extends Controller
         return view('ciudades.index', compact('provincias'));
     }
 
+    /**
+     * Devuelve ciudades por provincia en JSON (para uso AJAX)
+     */
+    public function byProvincia($provinciaId)
+    {
+        $ciudades = Ciudad::where('provincia_id', $provinciaId)->get();
+        return response()->json($ciudades);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -29,12 +33,10 @@ class CiudadController extends Controller
             'provincia_id' => 'required|exists:provincias,id',
         ]);
 
-        Cities::create([
+        Ciudad::create([
             'nombre'       => $request->nombre,
             'provincia_id' => $request->provincia_id,
         ]);
-
-
 
         return redirect()->route('admin.index')->with('success', 'Ciudad creada.');
     }

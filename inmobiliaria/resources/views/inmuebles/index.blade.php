@@ -85,6 +85,42 @@
 
     <!-- Bootstrap JS (opcional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Actualiza ciudades del filtro cuando cambia la provincia
+        async function fetchCiudadesFiltro(provinciaId, targetSelect) {
+            if (!provinciaId) {
+                targetSelect.innerHTML = '<option value="">Todas las ciudades</option>';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/provincias/${provinciaId}/ciudades`);
+                if (!res.ok) throw new Error('Network response not ok');
+                const ciudades = await res.json();
+
+                targetSelect.innerHTML = '<option value="">Todas las ciudades</option>';
+                ciudades.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.nombre;
+                    targetSelect.appendChild(opt);
+                });
+            } catch (err) {
+                console.error('Error cargando ciudades (filtro):', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const provinciaFilter = document.querySelector('#provincia');
+            const ciudadFilter = document.querySelector('#ciudad');
+
+            if (provinciaFilter && ciudadFilter) {
+                provinciaFilter.addEventListener('change', function() {
+                    fetchCiudadesFiltro(this.value, ciudadFilter);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
