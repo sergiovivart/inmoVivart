@@ -116,7 +116,6 @@ class PropertyController extends Controller
     public function update(PropertyUpdateRequest $request, Property $property)
     {
         $data = $request->validated();
-
         $property->fill($data);
         $property->save();
 
