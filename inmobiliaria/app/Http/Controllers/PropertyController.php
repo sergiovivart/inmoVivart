@@ -69,6 +69,7 @@ class PropertyController extends Controller
             $data['referencia_interna'] = 'REF' . uniqid();
         }
 
+        // crear el inmueble
         $property = Property::create($data);
 
         // Guardar imágenes si vienen en la petición
