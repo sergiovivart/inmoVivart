@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Provincia;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,6 +19,7 @@ class ProvinciaControllerTest extends TestCase
         ];
 
         // Simular la solicitud POST
+        $this->actingAs(User::factory()->create());
         $response = $this->post(route('provincias.store'), $data);
 
         // Verificar que el registro se haya creado en la base de datos
@@ -36,6 +38,7 @@ class ProvinciaControllerTest extends TestCase
         ];
 
         // Simular la solicitud POST
+        $this->actingAs(User::factory()->create());
         $response = $this->post(route('provincias.store'), $data);
 
         // Verificar que no se haya creado ningún registro

@@ -32,6 +32,8 @@ class PropertyUpdateRequest extends FormRequest
             'provincia_id' => 'required|exists:provincias,id',
             'ciudad_id' => 'required|exists:cities,id',
             'calle' => 'required|string|max:255',
+            'imagen' => 'nullable',
+            'imagen.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 }

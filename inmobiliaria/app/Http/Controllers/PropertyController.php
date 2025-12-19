@@ -120,6 +120,29 @@ class PropertyController extends Controller
         $property->fill($data);
         $property->save();
 
+        // Manejar imágenes si vienen en la petición (similar a create)
+        if ($request->hasFile('imagen')) {
+            $archivos = $request->file('imagen');
+            if (!is_array($archivos)) {
+                $archivos = [$archivos];
+            }
+
+            // usar la referencia interna actualizada si viene, si no la del modelo
+            $referencia = $data['referencia_interna'] ?? $property->referencia_interna;
+
+            $total = count($archivos);
+            foreach ($archivos as $index => $archivo) {
+                $extension = $archivo->getClientOriginalExtension();
+                if ($total === 1) {
+                    $nombreArchivo = 'foto.' . $extension;
+                } else {
+                    $nombreArchivo = 'foto' . ($index + 1) . '.' . $extension;
+                }
+
+                Storage::disk('public')->putFileAs('imagenes/' . $referencia, $archivo, $nombreArchivo);
+            }
+        }
+
         return redirect(route('admin.index'))->with('success', 'Inmueble actualizado correctamente');
     }
 
