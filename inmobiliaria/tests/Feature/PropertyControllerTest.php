@@ -57,8 +57,7 @@ class PropertyControllerTest extends TestCase
             'ciudad_id' => 1,
             'calle' => 'Calle Test'
         ];
-
-        $this->actingAs(User::factory()->create());
+        
         $response = $this->post(route('admin.inmuebles.create'), $data);
 
         $this->assertDatabaseHas('properties', $data);
@@ -83,7 +82,6 @@ class PropertyControllerTest extends TestCase
             'calle' => 'Calle Test'
         ]);
 
-        $this->actingAs(User::factory()->create());
         $response = $this->get(route('admin.inmuebles.edit', $property->id));
 
         $response->assertStatus(200);
@@ -122,8 +120,6 @@ class PropertyControllerTest extends TestCase
             'ciudad_id' => $ciudad->id,       // Usa el ID correcto
             'calle' => 'Calle Test'
         ];
-
-        $this->actingAs(User::factory()->create());
         $response = $this->put(route('properties.update', $property->id), $data);
 
         $this->assertEquals('Propiedad Test', $property->nombre);
@@ -153,7 +149,6 @@ class PropertyControllerTest extends TestCase
         $carpeta = public_path('imagenes/test-ref');
 
         // corremos la funcion
-        $this->actingAs(User::factory()->create());
         $response = $this->get(route('admin.inmuebles.delete', $property->id));
 
         $this->assertSoftDeleted('properties', ['id' => $property->id]);

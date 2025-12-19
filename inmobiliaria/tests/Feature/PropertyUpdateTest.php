@@ -44,7 +44,6 @@ class PropertyUpdateTest extends TestCase
             'calle' => 'New Street'
         ];
 
-        $this->actingAs(User::factory()->create());
         $response = $this->put(route('properties.update', $property->id), $data);
 
         $response->assertRedirect(route('admin.index'));
@@ -79,8 +78,6 @@ class PropertyUpdateTest extends TestCase
             'descripcion' => '',
             // missing precio, superficie, etc.
         ];
-
-        $this->actingAs(User::factory()->create());
         $response = $this->put(route('properties.update', $property->id), $invalid);
 
         $response->assertSessionHasErrors(['nombre', 'descripcion', 'precio', 'superficie', 'habitaciones', 'baños', 'provincia_id', 'ciudad_id', 'calle']);
@@ -130,7 +127,6 @@ class PropertyUpdateTest extends TestCase
             'calle' => 'C2'
         ];
 
-        $this->actingAs(User::factory()->create());
         $response = $this->put(route('properties.update', $p2->id), $data);
 
         $response->assertSessionHasErrors(['referencia_interna']);
