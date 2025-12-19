@@ -34,7 +34,6 @@ php artisan serve
 
 # Una ves lanzado el servidor.
 
-- http://127.0.0.1:8000/inmuebles -> direccion con lsitado de inmuebles.
+- http://127.0.0.1:8000/inmuebles -> listado de inmuebles.
 - http://127.0.0.1:8000/admin -> panel de administrador para crear nuevos inmuebles.
-<<<<<<< HEAD
 - Importante : recuerda crear una provincia y asignarle su ciudad antes de crear alguna nueva propiedad.
