@@ -193,7 +193,9 @@
                             </td>
                             <td>{{ $property->referencia_interna }}</td>
                             <td>{{ $property->nombre }}</td>
-                            <td>{{ $property->precio }}</td>
+                            <td>
+                                {{ number_format($property->precio, 0, ',', '.') }} €
+                            </td>
                             <td>{{ $property->superficie }}</td>
                             <td>{{ $property->habitaciones }}</td>
                             <td>{{ $property->baños }}</td>

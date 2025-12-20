@@ -10,17 +10,28 @@
 <body class="bg-light p-4">
 
     <style>
+        .card-image {
+            text-align: center;
+        }
+
         .card-image img {
-            width: 90%;
+            width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 0.25rem;
             margin-bottom: 1rem;
         }
+
+        .descripcion-corta {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
 
     <div class="container">
-        <h3>Propiedades</h3>
+        <h3 class="text-center">Propiedades</h3>
     </div>
 
     <!-- filepath: c:\Users\purpleflame\Desktop\DEV\inmoVivart\inmobiliaria\resources\views\inmuebles\index.blade.php -->
@@ -69,13 +80,33 @@
                                     alt="imagenPropiedad" class="img-fluid">
                             </div>
                             <h5 class="card-title">{{ $propiedad->nombre }}</h5>
-                            <p class="card-text">Descripción: {{ $propiedad->descripcion }}</p>
-                            <p class="card-text">Precio: {{ $propiedad->precio }}</p>
-                            <p class="card-text">Ubicación:
+
+                            <p class="card-text">
+                                {{ number_format($propiedad->precio, 0, ',', '.') }} €
+                            </p>
+
+                            <p class="card-text descripcion-corta">
+                                {{ $propiedad->descripcion }}
+                            </p>
+
+
+                            <p class="card-text text-muted">
+                                <span class="me-1">📍</span>
                                 <span>{{ $propiedad->provincia->nombre ?? 'Sin provincia' }}</span>
                                 <span> - </span>
                                 <span>{{ $propiedad->city->nombre ?? 'Sin ciudad' }}</span>
                             </p>
+
+
+                            <p class="card-text">
+                                <span class="me-4">📐 {{ $propiedad->superficie }} m²</span>
+                                <span class="me-4">🛏️ {{ $propiedad->habitaciones }}</span>
+                                <span>🚿 {{ $propiedad->baños }}</span>
+                            </p>
+
+                            <a href="{{ route('inmuebles.show', $propiedad->id) }}" class="btn btn-primary w-100">
+                                Ver Detalles
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -41,6 +41,20 @@ class PropertyController extends Controller
             'ciudades' => Ciudad::all(),
         ]);
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $property = Property::with(['provincia', 'city'])->find($id);
+        if (!$property) {
+            return redirect(route('inmuebles.index'))->with('error', 'Inmueble no encontrado');
+        }
+        return view('inmuebles.show', [
+            'propiedad' => $property
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

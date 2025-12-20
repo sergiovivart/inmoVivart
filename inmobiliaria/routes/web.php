@@ -12,8 +12,9 @@ Route::get('/', function () {
 
 // rutas usuarios
 Route::get('/inmuebles', [PropertyController::class, 'index'])->name('inmuebles.index');
+Route::get('/inmuebles/{id}', [PropertyController::class, 'show'])->name('inmuebles.show');
 
-    // rutas administrador (protegidas por auth)
+    // rutas administrador 
     Route::get('/admin',              [PropertyController::class, 'admin'])->name('admin.index');
     Route::post('/admin/create',      [PropertyController::class, 'create'])->name('admin.inmuebles.create');
     Route::get('/admin/edit/{id}',    [PropertyController::class, 'edit'])->name('admin.inmuebles.edit');
