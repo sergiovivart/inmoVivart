@@ -100,8 +100,8 @@
 
                             <p class="card-text">
                                 <span class="me-4">📐 {{ $propiedad->superficie }} m²</span>
-                                <span class="me-4">🛏️ {{ $propiedad->habitaciones }}</span>
-                                <span>🚿 {{ $propiedad->baños }}</span>
+                                <span class="me-4">🛏️ {{ $propiedad->habitaciones }} habitaciones</span>
+                                <span>🚿 {{ $propiedad->baños }} baños</span>
                             </p>
 
                             <a href="{{ route('inmuebles.show', $propiedad->id) }}" class="btn btn-primary w-100">
