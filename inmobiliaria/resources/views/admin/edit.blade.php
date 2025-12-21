@@ -64,8 +64,7 @@
 
             <div class="mb-3">
                 <label>Actualizar Imagen(es)</label>
-                <input type="file" name="imagen[]" id="imagenInputEdit" class="form-control" accept="image/*"
-                    multiple>
+                <input type="file" name="imagen[]" id="imagenInputEdit" class="form-control" accept=".jpg" multiple>
                 <div id="previewsEdit" class="mt-3 d-flex gap-2 flex-wrap">
                     <img src="{{ asset('storage/imagenes/' . $property->referencia_interna . '/foto.jpg') }}"
                         alt="imagenPropiedad" class="img-fluid border rounded"

@@ -95,11 +95,11 @@ class PropertyController extends Controller
 
             $total = count($archivos);
             foreach ($archivos as $index => $archivo) {
-                $extension = $archivo->getClientOriginalExtension();
+                // $extension = $archivo->getClientOriginalExtension();
                 if ($total === 1) {
-                    $nombreArchivo = 'foto.' . $extension;
+                    $nombreArchivo = 'foto.jpg';
                 } else {
-                    $nombreArchivo = 'foto' . ($index + 1) . '.' . $extension;
+                    $nombreArchivo = 'foto' . ($index + 1) . '.jpg';
                 }
 
                 Storage::disk('public')->putFileAs('imagenes/' . $data['referencia_interna'], $archivo, $nombreArchivo);
@@ -146,11 +146,11 @@ class PropertyController extends Controller
 
             $total = count($archivos);
             foreach ($archivos as $index => $archivo) {
-                $extension = $archivo->getClientOriginalExtension();
+                 // $extension = $archivo->getClientOriginalExtension();
                 if ($total === 1) {
-                    $nombreArchivo = 'foto.' . $extension;
+                    $nombreArchivo = 'foto.jpg';
                 } else {
-                    $nombreArchivo = 'foto' . ($index + 1) . '.' . $extension;
+                    $nombreArchivo = 'foto' . ($index + 1) . '.jpg';
                 }
 
                 Storage::disk('public')->putFileAs('imagenes/' . $referencia, $archivo, $nombreArchivo);

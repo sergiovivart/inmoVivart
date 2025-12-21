@@ -45,7 +45,7 @@
                             <div class="col">
                                 <label>Seleccionar Imagen(es)</label>
                                 <input type="file" name="imagen[]" id="imagenInput" class="form-control"
-                                    accept="image/*" multiple>
+                                    accept=".jpg" multiple>
                                 <div id="previews" class="mt-3 d-flex gap-2 flex-wrap"></div>
                             </div>
                         </div>
